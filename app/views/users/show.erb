@@ -1,0 +1,7 @@
+<h1>Your Tweets:</h1>
+
+<% @user.tweets.each do |tweet| %>
+    <%= tweet.content %>
+<% end %>    
+
+<a href="/tweets/edit">Edit tweet</a>
