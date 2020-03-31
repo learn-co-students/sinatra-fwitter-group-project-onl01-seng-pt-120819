@@ -1,0 +1,7 @@
+<h1>Welcome to Fwitter!</h1>
+
+<div class="wrapper">
+    <% if !Helpers.logged_in?(session) %>
+        <p class="links"><a href="/signup">Sign Up</a></p>
+        <p class="links"><a href="/login">Log In</a></p>
+    <% end %>
