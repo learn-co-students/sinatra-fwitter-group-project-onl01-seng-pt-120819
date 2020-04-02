@@ -17,16 +17,14 @@ class ApplicationController < Sinatra::Base
   
     def logged_in?
        
-      if session[:user_id]
-        true
-      else 
-        false
-      end
+    !!current_user
+      
     #  if the session hash has a user id that means someone is logged in 
-end
+    end
 
     def current_user
-      User.find(session[:user_id])
+      # binding.pry
+     @current_user ||= User.find(session[:user_id]) if session[:user_id]
       # find current user based on current user id inside of the session
     end
   
