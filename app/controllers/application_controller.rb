@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
    
   get "/" do 
-    erb :layout
+    erb :index
   end
 
   helpers do
@@ -31,6 +31,11 @@ end
     end
   
   end
+
+  # get '/tweets/index' do
+
+  #   erb :layout
+  # end
 
 
 
