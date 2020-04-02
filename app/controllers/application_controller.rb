@@ -14,27 +14,16 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-  
     def logged_in?
-       
-    !!current_user
-      
+     !!current_user
     #  if the session hash has a user id that means someone is logged in 
     end
 
     def current_user
       # binding.pry
-     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      rescue ActiveRecord::RecordNotFound
       # find current user based on current user id inside of the session
     end
-  
   end
-
-  # get '/tweets/index' do
-
-  #   erb :layout
-  # end
-
-
-
 end

@@ -2,47 +2,45 @@ require 'pry'
 class UsersController < ApplicationController
 
 
-    get "/signup" do 
-        if logged_in?
-            redirect "/tweets"
-        else 
-        erb :'users/create_user'
-      end
+  get "/signup" do 
+    if logged_in?
+      redirect "/tweets"
+    else 
+      erb :'users/create_user'
     end
+  end
     
-    post "/signup" do
-    #   binding.pry
-      if  params[:username] == "" || params[:email] == "" || params[:password] == ""
-           redirect to '/signup'
-      else 
-           user = User.new(:username=> params[:username], :email=> params[:email], :password=> params[:password])   
-           user.save
-           session[:user_id] = user.id
-           redirect to "/tweets"
-
-      end
+  post "/signup" do
+    #binding.pry
+    if  params[:username] == "" || params[:email] == "" || params[:password] == ""
+       redirect to '/signup'
+    else 
+       user = User.new(:username=> params[:username], :email=> params[:email], :password=> params[:password])   
+       user.save
+       session[:user_id] = user.id
+       redirect to "/tweets"
     end
+  end
 
 
-    get "/login" do
-      if logged_in?
-        redirect to '/tweets'
-      else
+  get "/login" do
+    if logged_in?
+      redirect to '/tweets'
+    else
         # binding.pry
-          #  logged_in?
-          erb :'users/login'
-      end
+       erb :'users/login'
     end
+  end
 
-    post "/login" do 
-        user = User.find_by(:username=> params[:username])
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            redirect to '/tweets'
-        else 
-            redirect to 'users/create_user'
-        end
+  post "/login" do 
+      user = User.find_by(:username=> params[:username])
+    if user && user.authenticate(params[:password])
+       session[:user_id] = user.id
+        redirect to '/tweets'
+    else 
+       redirect to 'users/create_user'
     end
+  end
 
   get '/logout' do 
     if logged_in?
