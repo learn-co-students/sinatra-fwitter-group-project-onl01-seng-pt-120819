@@ -22,9 +22,9 @@ class TweetsController < ApplicationController
         if params[:content] == ''      
             redirect to "/tweets/new"
         else
-            @current_user = Helpers.current_user(session)
-            @tweet = @current_user.tweets.create(:content => params[:content])
-            redirect to "/tweets/#{@tweet.id}"
+            current_user = Helpers.current_user(session)
+            tweet = current_user.tweets.create(:content => params[:content])
+            redirect to "/tweets/#{tweet.id}"
         end
     end
 
@@ -53,23 +53,23 @@ class TweetsController < ApplicationController
 
     patch '/tweets/:id' do #Update Action 
         if Helpers.is_logged_in?(session)
-            @tweet = Tweet.find_by_id(params[:id])
-            @tweet.content = params[:content]
-            if @tweet.content == ''
-                redirect to "/tweets/#{@tweet.id}/edit"  
+            tweet = Tweet.find_by_id(params[:id])
+            tweet.content = params[:content]
+            if tweet.content == ''
+                redirect to "/tweets/#{tweet.id}/edit"  
             else 
-                @tweet.save
-                redirect to "/tweets/#{@tweet.id}" 
+                tweet.save
+                redirect to "/tweets/#{tweet.id}" 
             end
         end  
     end 
 
     delete '/tweets/:id' do #Delete Action
         if Helpers.is_logged_in?(session)
-            @tweet = Tweet.find_by_id(params[:id])
-            @current_user = Helpers.current_user(session)
-            if @tweet.user == @current_user
-                @tweet.delete 
+            tweet = Tweet.find_by_id(params[:id])
+            current_user = Helpers.current_user(session)
+            if tweet.user == current_user
+                tweet.delete 
             end
         else
             redirect to '/'
