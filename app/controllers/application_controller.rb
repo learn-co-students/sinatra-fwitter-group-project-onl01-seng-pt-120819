@@ -14,9 +14,6 @@ class ApplicationController < Sinatra::Base
       erb :index
   end
 
-  get '/layout' do 
-    erb :layout 
-  end
   
 
   helpers do
