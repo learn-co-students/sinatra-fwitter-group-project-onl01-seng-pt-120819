@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     set :session_secret, "password_security"
   end
-   
+  
   get "/" do 
     erb :index
   end
@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
     def current_user
       # binding.pry
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
-      rescue ActiveRecord::RecordNotFound
+      # rescue ActiveRecord::RecordNotFound
       # find current user based on current user id inside of the session
     end
   end
