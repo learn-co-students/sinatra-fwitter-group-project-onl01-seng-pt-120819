@@ -1,6 +1,8 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
+  use Rack::Flash
 
   configure do
     enable :sessions
@@ -10,7 +12,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do 
+    @user = current_user if logged_in?
     erb :'/users/home'
 end
+
+helpers do 
+  def logged_in?
+      !!session[:user_id]
+  end
+
+  def current_user
+    @user = User.find(session[:user_id])
+  end
+
+end
+
+
 
 end

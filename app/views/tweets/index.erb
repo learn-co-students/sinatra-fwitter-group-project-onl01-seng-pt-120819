@@ -1,2 +1,12 @@
-<h1>Your tweets</h1>
-<a href="/login">Log In</a> or <a href="/signup">Sign Up</a>
+<h1>Welcome, <%= @user.username %></h1>
+<ul>
+<% @tweets.each do |tweet| %>
+
+
+<li><%= tweet.content %></li>
+
+<% end %>
+</ul>
+
+<a href="/tweets/new">New Tweet</a>
+<a href="/logout">Log Out</a> 
