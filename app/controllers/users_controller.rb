@@ -12,17 +12,17 @@ end
     
 
     post '/signup' do 
+        if params[:username] == "" || params[:email] == "" || params[:password] == ""
+            redirect to "/signup"
+        else
         user = User.create(username: params[:username], email: params[:email], password: params[:password])
         #binding.pry
-        if user.valid?
         session[:user_id] = user.id  
         redirect to "/tweets"
-        else 
-            flash[:new_user_error] = "Please enter a valid information"   
-        redirect to "/signup"
     end
-    redirect to "/tweets"
-  end 
+    end 
+ 
+
 
 
     get '/login' do 
