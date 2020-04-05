@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+    
     get '/signup' do 
         if is_logged_in?
             redirect to '/tweets'
@@ -28,16 +29,23 @@ class UsersController < ApplicationController
     end 
 
     post '/login' do 
-       @user = User.find_by(:username => params[:username])
+       @user = User.find_by(:username => params["username"])
         #   binding.pry
        if @user 
             session[:user_id] = @user.id 
             redirect to "/tweets"
            end
-            # erb ":users/login"
     end
 
-   
+    get '/users/:slug' do
+        @user = User.find_by_slug(params[:slug])
+        if !@user.nil?
+          erb :'/users/show'
+        else 
+          redirect to '/login'
+        end
+      end      
+
     get '/logout' do 
         if is_logged_in?
             session.clear
@@ -47,13 +55,13 @@ class UsersController < ApplicationController
         end
     end 
 
-    post '/logout' do 
-        if is_logged_in?
-            session.clear
-            redirect to "/tweets"
-        else 
-            redirect to '/login'
-        end 
-    end
+    # post '/logout' do 
+    #     if is_logged_in?
+    #         session.clear
+    #         redirect to "/login"
+    #     else 
+    #         redirect to '/login'
+    #     end 
+    # end
 
 end
