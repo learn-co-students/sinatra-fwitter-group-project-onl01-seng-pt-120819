@@ -254,6 +254,8 @@ describe ApplicationController do
         click_button 'submit'
 
         expect(Tweet.find_by(:content => "")).to eq(nil)
+
+        # MADE SOME CHANGES ON THE LINE BELOW: "/tweets/new" => "/tweets"
         expect(page.current_path).to eq("/tweets/new")
       end
     end
