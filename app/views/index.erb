@@ -1,2 +1,10 @@
-<a href="/login">Login</a>
-<a href="/signup">Signup</a>
+  <% if logged_in? %>
+
+    <a href="/tweets/new"> Create Tweet </a>
+    <a href="/logout"> Log Out </a>
+    <p>Welcome, <%=current_user.username %></p>
+
+  <% else %>
+    <a href="/signup">Sign Up</a>
+    <a href="/login"> Sign In </a>
+  <%end %>

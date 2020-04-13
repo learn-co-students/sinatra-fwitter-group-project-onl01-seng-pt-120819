@@ -10,18 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_085337) do
+ActiveRecord::Schema.define(version: 2020_04_13_004232) do
 
   create_table "tweets", force: :cascade do |t|
-    t.string "content"
+    t.text "content"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "email"
+    t.text "email"
     t.string "password_digest"
-    t.integer "tweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
