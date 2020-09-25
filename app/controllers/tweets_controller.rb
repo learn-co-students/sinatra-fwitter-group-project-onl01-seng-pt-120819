@@ -44,7 +44,7 @@ class TweetsController < ApplicationController
             redirect to '/tweets'
 
         end
-        erb :'tweets/edit_tweet'
+        erb :'tweets/edit_tweets'
     end
 
     patch '/tweets/:id' do
